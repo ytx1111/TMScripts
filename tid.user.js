@@ -1,11 +1,11 @@
 // ==UserScript==
 // @name         淘宝 图片获取脚本
 // @namespace    https://item.taobao.com/
-// @version      0.81
+// @version      1.0
 // @description  淘宝缩略图、分类图、详情图（详情图需要所有详情图片显示完毕再点击才能正常下载）下载
 // @author       Richard He
 // @iconURL      http://www.xuebalib.cn/userjs/icon.ico
-// @resource css http://www.xuebalib.cn/userjs/css.css?v=23
+// @resource css http://www.xuebalib.cn/userjs/css.css?v=30
 // @match        https://item.taobao.com/*
 // @grant        GM_setClipboard
 // @grant        GM_notification
@@ -101,10 +101,10 @@ buttonC.onclick = function()
 		}
 	});
 };
-buttonC.innerHTML = '获取详情页';
-buttonC.style.bottom = '0px';
+buttonC.innerHTML = '下';
+buttonC.title = '下载详情页图片';
 buttonC.className = 'comBut butX';
-document.body.appendChild(buttonC);
+document.getElementById('J_TabBar').appendChild(buttonC);
 
 //图片加边框
 var buttonD= document.createElement('button');
@@ -118,7 +118,7 @@ buttonD.onclick = function()
 		imgs[i].style.border = '4px solid red';
 	}
 };
-buttonD.innerHTML = '图片加边框';
-buttonD.style.bottom = '40px';
+buttonD.innerHTML = '框';
+buttonD.title = '给详情图每张图片描上边框';
 buttonD.className = 'comBut butX';
-document.body.appendChild(buttonD);
+document.getElementById('J_TabBar').appendChild(buttonD);
