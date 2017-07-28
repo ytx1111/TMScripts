@@ -2,7 +2,7 @@
 // @name         淘宝 图片获取脚本
 // @namespace    https://item.taobao.com/
 // @version      1.1
-// @description  淘宝缩略图、分类图、详情图（详情图需要所有详情图片显示完毕再点击才能正常下载）下载
+// @description  淘宝缩略图、分类图、详情图下载 # 目前可适配金牌店铺，普通店铺，全球购 ## 不适配服装类店铺
 // @author       Richard He
 // @iconURL      http://www.xuebalib.cn/userjs/icon.ico
 // @resource css http://www.xuebalib.cn/userjs/css.css?v=30
