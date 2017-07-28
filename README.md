@@ -1,2 +1,2 @@
 # js
-js for tm
+javascript for tamperMonkey
