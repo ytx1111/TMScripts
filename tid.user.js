@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         淘宝 图片获取脚本
 // @namespace    https://item.taobao.com/
-// @version      1.0
+// @version      1.1
 // @description  淘宝缩略图、分类图、详情图（详情图需要所有详情图片显示完毕再点击才能正常下载）下载
 // @author       Richard He
 // @iconURL      http://www.xuebalib.cn/userjs/icon.ico
@@ -39,9 +39,9 @@ for(var i in lis)
 
 //分类图
 var tbProp = document.getElementsByClassName('tb-prop');
-if(tbProp===null){}
-else
+if(tbProp===null||'undefined')
 {
+	tbProp = document.getElementsByClassName('J_Prop');
 	//创建所需元素
 	var down = document.createElement('dl');
 	var dt1 = document.createElement('dt');
@@ -78,47 +78,54 @@ else
 	}
 }
 
-//获取详情图
-var imgAdrs = [];
-var buttonC = document.createElement('button');
-buttonC.onclick = function() 
+document.onreadystatechange = makeButton;//当页面加载状态改变的时候执行这个方法. 
+function makeButton()
 {
-	var desLis = document.getElementById('J_DivItemDesc').childNodes;
-	var des = document.getElementById('J_DivItemDesc');
-	var imgs = des.getElementsByTagName('img');
-	for(var i in imgs)
-	{
-		if(typeof imgs[i] == 'object' && imgs[i].src.indexOf('assets')<0)
-		imgAdrs.push(imgs[i].src);
-	}
-	GM_notification({
-		text:'本次将下载 '+imgAdrs.length+ ' 张图片',
-		title:'友情提示',timeout:3000},function()
-					{
-		for(var j in imgAdrs)
-		{
-			GM_download(imgAdrs[j],"X"+j);
-		}
-	});
-};
-buttonC.innerHTML = '下';
-buttonC.title = '下载详情页图片';
-buttonC.className = 'comBut butX';
-document.getElementById('J_TabBar').appendChild(buttonC);
+ if(document.readyState == "complete") //当页面加载状态 
+ {
+	 //获取详情图
+	 var imgAdrs = [];
+	 var buttonC = document.createElement('button');
+	 buttonC.onclick = function() 
+	 {
+		 var desLis = document.getElementById('J_DivItemDesc').childNodes;
+		 var des = document.getElementById('J_DivItemDesc');
+		 var imgs = des.getElementsByTagName('img');
+		 for(var i in imgs)
+		 {
+			 if(typeof imgs[i] == 'object' && imgs[i].src.indexOf('assets')<0)
+				 imgAdrs.push(imgs[i].src);
+		 }
+		 GM_notification({
+			 text:'本次将下载 '+imgAdrs.length+ ' 张图片',
+			 title:'友情提示',timeout:3000},function()
+						 {
+			 for(var j in imgAdrs)
+			 {
+				 GM_download(imgAdrs[j],"X"+j);
+			 }
+		 });
+	 };
+	 buttonC.innerHTML = '下';
+	 buttonC.title = '下载详情页图片';
+	 buttonC.className = 'comBut butX';
+	 document.getElementById('J_TabBar').appendChild(buttonC);
 
-//图片加边框
-var buttonD= document.createElement('button');
-buttonD.onclick = function() 
-{
-	var des = document.getElementById('J_DivItemDesc');
-	var imgs = des.getElementsByTagName('img');
-	for(var i in imgs)
-	{
-		if(typeof imgs[i] == 'object' && imgs[i].src.indexOf('assets')<0)
-		imgs[i].style.border = '4px solid red';
-	}
-};
-buttonD.innerHTML = '框';
-buttonD.title = '给详情图每张图片描上边框';
-buttonD.className = 'comBut butX';
-document.getElementById('J_TabBar').appendChild(buttonD);
+	 //图片加边框
+	 var buttonD= document.createElement('button');
+	 buttonD.onclick = function() 
+	 {
+		 var des = document.getElementById('J_DivItemDesc');
+		 var imgs = des.getElementsByTagName('img');
+		 for(var i in imgs)
+		 {
+			 if(typeof imgs[i] == 'object' && imgs[i].src.indexOf('assets')<0)
+				 imgs[i].style.border = '4px solid red';
+		 }
+	 };
+	 buttonD.innerHTML = '框';
+	 buttonD.title = '给详情图每张图片描上边框';
+	 buttonD.className = 'comBut butX';
+	 document.getElementById('J_TabBar').appendChild(buttonD);
+ }
+} 
