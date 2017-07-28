@@ -1,11 +1,11 @@
 // ==UserScript==
 // @name         淘宝 图片获取脚本
 // @namespace    https://item.taobao.com/
-// @version      0.76
+// @version      0.80
 // @description  淘宝缩略图、分类图、详情图（详情图需要所有详情图片显示完毕再点击才能正常下载）
 // @author       Richard He
 // @iconURL      http://www.xuebalib.cn/userjs/icon.ico
-// @resource css http://www.xuebalib.cn/userjs/css.css?v=19
+// @resource css http://www.xuebalib.cn/userjs/css.css?v=23
 // @match        https://item.taobao.com/*
 // @grant        GM_setClipboard
 // @grant        GM_notification
@@ -27,8 +27,8 @@ for(var i in lis)
 		var br = document.createElement('button');
 		src = lis[i].getElementsByTagName('img')[0].src.slice(0,-16);
 		br.title = src;
-		br.innerText = parseInt(i)+1;
-			br.className = 'comBut butS';
+		br.className = 'comBut butS';
+		br.style.backgroundImage = "url("+src+"_50x50.jpg"+")";
 		br.onclick = function()
 		{
 			GM_download(this.title,"S");
