@@ -2,7 +2,7 @@
 // @name         淘宝 图片获取脚本
 // @namespace    https://item.taobao.com/
 // @version      0.80
-// @description  淘宝缩略图、分类图、详情图（详情图需要所有详情图片显示完毕再点击才能正常下载）
+// @description  淘宝缩略图、分类图、详情图（详情图需要所有详情图片显示完毕再点击才能正常下载）下载
 // @author       Richard He
 // @iconURL      http://www.xuebalib.cn/userjs/icon.ico
 // @resource css http://www.xuebalib.cn/userjs/css.css?v=23
