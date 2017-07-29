@@ -48,6 +48,7 @@ if(tbProp===null||'undefined'&&tbProp[0].getElementsByTagName('dt')[0].innerHTML
 	tbProp[0].parentNode.insertBefore(down,tbProp[0].nextSibling);
 	dt1.className = 'tb-property-type';
 	dt1.innerText = '下载分类';
+	down.id = "down";
 	down.appendChild(dt1);
 	var dd = document.createElement('dd');
 	down.appendChild(dd);
@@ -56,26 +57,38 @@ if(tbProp===null||'undefined'&&tbProp[0].getElementsByTagName('dt')[0].innerHTML
 	dd.appendChild(ul);
 
 	var as = tbProp[0].getElementsByTagName('a');
+	var count = 0;
 	for(var i in as)
 	{
 		if(typeof as[i] == 'object')
 		{
 			src = as[i].style.backgroundImage.slice(5,-12);
-			var li = document.createElement('li');
-			var bt = document.createElement('button');
-			bt.className = 'comBut butF';
-			bt.title = 'http:' + src;
-			bt.style.backgroundImage = "url("+src+"_30x30.jpg"+")";
-			bt.style.backgroundRepeat = "no-repeat";
-			bt.style.backgroundPosition = "center center";
-			bt.onclick = function()
+			if(src !="")
 			{
-				GM_download(this.title,"F");
-			};
-			ul.appendChild(li);
-			li.appendChild(bt);
+				var li = document.createElement('li');
+				var bt = document.createElement('button');
+				bt.className = 'comBut butF';
+				bt.title = 'http:' + src;
+				bt.style.backgroundImage = "url("+src+"_30x30.jpg"+")";
+				bt.style.backgroundRepeat = "no-repeat";
+				bt.style.backgroundPosition = "center center";
+				bt.onclick = function()
+				{
+					GM_download(this.title,"F");
+				};
+				ul.appendChild(li);
+				li.appendChild(bt);
+			}
+			else
+			{
+			}
 		}
 	}
+	if(document.getElementById('down').getElementsByTagName('li').length===0)
+	{
+	   document.getElementById('down').style.display = 'none';
+	}
+	
 }
 
 document.onreadystatechange = makeButton;//当页面加载状态改变的时候执行这个方法. 
